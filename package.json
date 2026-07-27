@@ -1,0 +1,23 @@
+{
+  "name": "fitness",
+  "version": "1.0.0",
+  "description": "- The user can sign up for a fitness app with a username, email and password.\r - The user can login using their email and password.\r - Username ID is linked to email ID\r - Password is linked to email and user ID's",
+  "homepage": "https://github.com/DarcyIsSoCOOLANDAWESOME/FitnessApp#readme",
+  "bugs": {
+    "url": "https://github.com/DarcyIsSoCOOLANDAWESOME/FitnessApp/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DarcyIsSoCOOLANDAWESOME/FitnessApp.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@hapi/hapi": "^21.4.10"
+  }
+}
