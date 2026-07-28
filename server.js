@@ -10,9 +10,11 @@ const init = async () => {
 
   server.route({
     method: "GET",
-    path: "/",
-    handler: (request, h) => {
-      return "<h1>Hello World!</h1>";
+    path: "/name",
+    handler: async () => {
+      const name = await prisma.name.findMany();
+
+      return name;
     },
   });
 
