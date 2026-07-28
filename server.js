@@ -1,6 +1,9 @@
 "use strict";
 
 const Hapi = require("@hapi/hapi");
+const { PrismaClient } = require("@prisma/client");
+
+const prisma = new PrismaClient();
 
 const init = async () => {
   const server = Hapi.Server({
@@ -10,11 +13,11 @@ const init = async () => {
 
   server.route({
     method: "GET",
-    path: "/name",
+    path: "/User",
     handler: async () => {
-      const name = await prisma.name.findMany();
+      const users = await prisma.user.findMany();
 
-      return name;
+      return users;
     },
   });
 

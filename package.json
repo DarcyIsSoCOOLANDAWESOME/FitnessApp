@@ -20,9 +20,8 @@
   },
   "dependencies": {
     "@hapi/hapi": "^21.4.10",
-    "@supabase/supabase-js": "^2.111.0"
-  },
-  "devDependencies": {
-    "prisma": "^7.9.1"
+    "@prisma/client": "^6.19.3",
+    "@supabase/supabase-js": "^2.111.0",
+    "prisma": "^6.19.3"
   }
 }
