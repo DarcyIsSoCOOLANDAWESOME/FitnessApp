@@ -14,3 +14,7 @@
 - The user can put a goal weight and reps (not sets, this would be too complicated to add total loaded KG during exercise, so i will just do it by weight and reps)
 
 ## JavaScript
+
+## API
+
+- The API i will be intergrating into my project is EDB database.
