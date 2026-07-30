@@ -13,3 +13,14 @@ model User {
 
   @@map("User")
 }
+
+model WorkoutExercise {
+  id             BigInt @id @default(autoincrement())
+  workoutId      BigInt
+  wgerExerciseId BigInt
+  sets           BigInt
+  reps           BigInt
+  weight         Float
+
+  @@map("WorkoutExercise")
+}

@@ -17,4 +17,4 @@
 
 ## API
 
-- The API i will be intergrating into my project is EDB database.
+- The API i will no longer be intergrating into my project is EDB database. There are too many restrictions in the terms and conditions, instead I will be using wger project
