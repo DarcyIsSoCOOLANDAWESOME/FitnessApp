@@ -19,31 +19,18 @@ const init = async () => {
         return await prisma.user.findMany();
       },
     },
-
+    {
+      method: "GET",
+      path: "/workout-exercise",
+      handler: async () => {
+        return await prisma.workoutExercise.findMany();
+      },
+    },
     {
       method: "GET",
       path: "/health",
       handler: () => {
         return "health status ok";
-      },
-    },
-
-    {
-      method: "GET",
-      path: "/workout-exercise",
-      handler: async () => {
-        try {
-          const result = await prisma.workoutExercise.findMany();
-          return result;
-        } catch (err) {
-          console.error(err);
-          return {
-            name: err.name,
-            message: err.message,
-            code: err.code,
-            meta: err.meta,
-          };
-        }
       },
     },
   ]);
