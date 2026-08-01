@@ -23,7 +23,20 @@ const init = async () => {
       method: "GET",
       path: "/workout-exercise",
       handler: async () => {
-        return await prisma.workoutExercise.findMany();
+        console.log("STEP 1");
+
+        await prisma.$connect();
+
+        console.log("STEP 2 - connected");
+
+        const result = await prisma.$queryRaw`
+      SELECT * FROM public."workoutExercise"
+    `;
+
+        console.log("STEP 3");
+        console.log(result);
+
+        return result;
       },
     },
     {
