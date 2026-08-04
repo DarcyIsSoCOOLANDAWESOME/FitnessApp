@@ -25,11 +25,7 @@ const init = async () => {
       method: "GET",
       path: "/workout-exercise",
       handler: async () => {
-        await prisma.$connect();
-        const result = await prisma.$queryRaw`
-      SELECT * FROM public."workoutExercise"`;
-
-        return result;
+        return await prisma.workoutExercise();
       },
     },
     //Cannot get this POST to work, 500 internal server error. Could be naming conventions?
@@ -37,11 +33,11 @@ const init = async () => {
       method: "POST",
       path: "/workout-exercise",
       handler: async (request, h) => {
-        const { workoutid, wgerExerciseId, sets, reps, weight } =
+        const { workoutId, wgerExerciseId, sets, reps, weight } =
           request.payload;
         try {
           const workoutExercise = await prisma.workoutExercise.create({
-            data: { workoutid, wgerExerciseId, sets, reps, weight },
+            data: { workoutId, wgerExerciseId, sets, reps, weight },
           });
           return workoutExercise;
         } catch (err) {

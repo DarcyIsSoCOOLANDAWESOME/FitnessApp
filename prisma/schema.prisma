@@ -17,7 +17,7 @@ model User {
 
 model WorkoutExercise {
 id            String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-workoutid      String @db.Uuid
+workoutId      String @db.Uuid
 wgerExerciseId BigInt
 sets           Int
 reps           Int
