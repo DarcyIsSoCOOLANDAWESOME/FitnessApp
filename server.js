@@ -19,6 +19,7 @@ const init = async () => {
         return await prisma.user.findMany();
       },
     },
+
     //In order for this page to work, I have to write out raw SQL? It won't work like the above /user
     {
       method: "GET",
@@ -26,33 +27,28 @@ const init = async () => {
       handler: async () => {
         await prisma.$connect();
         const result = await prisma.$queryRaw`
-      SELECT * FROM public."workoutExercise"
-    `;
-
-        console.log("STEP 3");
-        console.log(result);
+      SELECT * FROM public."workoutExercise"`;
 
         return result;
       },
     },
+    //Cannot get this POST to work, 500 internal server error. Could be naming conventions?
     {
       method: "POST",
       path: "/workout-exercise",
       handler: async (request, h) => {
         const { workoutid, wgerExerciseId, sets, reps, weight } =
           request.payload;
-
-        const workoutExercise = await prisma.workoutExercise.create({
-          data: {
-            workoutid,
-            wgerExerciseId,
-            sets,
-            reps,
-            weight,
-          },
-        });
-
-        return workoutExercise;
+        try {
+          const workoutExercise = await prisma.workoutExercise.create({
+            data: { workoutid, wgerExerciseId, sets, reps, weight },
+          });
+          return workoutExercise;
+        } catch (err) {
+          // add console error
+          console.error(err);
+          return h.response({ error: err.message }).code(500);
+        }
       },
     },
     {
