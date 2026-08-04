@@ -19,13 +19,12 @@ const init = async () => {
         return await prisma.user.findMany();
       },
     },
+    //In order for this page to work, I have to write out raw SQL? It won't work like the above /user
     {
       method: "GET",
       path: "/workout-exercise",
       handler: async () => {
-        // console.log("STEP 1");
         await prisma.$connect();
-        // console.log("STEP 2 - connected");
         const result = await prisma.$queryRaw`
       SELECT * FROM public."workoutExercise"
     `;
@@ -34,6 +33,26 @@ const init = async () => {
         console.log(result);
 
         return result;
+      },
+    },
+    {
+      method: "POST",
+      path: "/workout-exercise",
+      handler: async (request, h) => {
+        const { workoutid, wgerExerciseId, sets, reps, weight } =
+          request.payload;
+
+        const workoutExercise = await prisma.workoutExercise.create({
+          data: {
+            workoutid,
+            wgerExerciseId,
+            sets,
+            reps,
+            weight,
+          },
+        });
+
+        return workoutExercise;
       },
     },
     {
@@ -52,11 +71,11 @@ const init = async () => {
         return user;
       },
     },
-    {
-      method: "DELETE",
-      path: "/workout-exercise",
-      handler: async (request, h) => {},
-    },
+    // {
+    //   method: "DELETE",
+    //   path: "/user",
+    //   handler: async (request, h) => {},
+    // },
     {
       method: "GET",
       path: "/health",
