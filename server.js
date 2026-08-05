@@ -53,6 +53,21 @@ const init = async () => {
       },
     },
     {
+      method: "DELETE",
+      path: "/workout-exercise/{id}",
+      handler: async (request, h) => {
+        const id = request.params.id;
+
+        const workoutExercise = await prisma.workoutExercise.delete({
+          where: {
+            id: id,
+          },
+        });
+
+        return workoutExercise;
+      },
+    },
+    {
       method: "GET",
       path: "/user",
       handler: async () => {
@@ -75,7 +90,13 @@ const init = async () => {
         return user;
       },
     },
-
+    {
+      method: "PUT",
+      path: "/user",
+      handler: async (request, h) => {
+        const { id, name, email } = request.payload;
+      },
+    },
     {
       method: "DELETE",
       path: "/user/{id}",
