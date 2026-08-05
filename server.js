@@ -12,20 +12,12 @@ const init = async () => {
   });
 
   server.route([
-    {
-      method: "GET",
-      path: "/user",
-      handler: async () => {
-        return await prisma.user.findMany();
-      },
-    },
-
-    //In order for this page to work, I have to write out raw SQL? It won't work like the above /user
+    //In order for this page to work. It won't work like the above /user
     {
       method: "GET",
       path: "/workout-exercise",
       handler: async () => {
-        return await prisma.workoutExercise();
+        return prisma.workouExercise.findMany();
       },
     },
     //Cannot get this POST to work, 500 internal server error. Could be naming conventions?
@@ -48,6 +40,26 @@ const init = async () => {
       },
     },
     {
+      method: "PUT",
+      path: "/workout-exercise",
+      handler: async (request, h) => {
+        const { id, workoutId, wgerExerciseId, sets, reps, weight } =
+          request.payload;
+
+        prisma.workoutExercise.update({
+          where: { id },
+          data: { workoutId, wgerExerciseId, sets, reps, weight },
+        });
+      },
+    },
+    {
+      method: "GET",
+      path: "/user",
+      handler: async () => {
+        return await prisma.user.findMany();
+      },
+    },
+    {
       method: "POST",
       path: "/user",
       handler: async (request, h) => {
@@ -63,16 +75,20 @@ const init = async () => {
         return user;
       },
     },
-    // {
-    //   method: "DELETE",
-    //   path: "/user",
-    //   handler: async (request, h) => {},
-    // },
+
     {
-      method: "GET",
-      path: "/health",
-      handler: () => {
-        return "health status ok";
+      method: "DELETE",
+      path: "/user/{id}",
+      handler: async (request, h) => {
+        const id = request.params.id;
+
+        const user = await prisma.user.delete({
+          where: {
+            id: id,
+          },
+        });
+
+        return user;
       },
     },
 
