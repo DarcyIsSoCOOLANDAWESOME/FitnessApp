@@ -2,13 +2,13 @@
 
 const Hapi = require("@hapi/hapi");
 const { PrismaClient } = require("@prisma/client");
-
+const port = process.env.PORT || 4000;
 const prisma = new PrismaClient();
 
 const init = async () => {
   const server = Hapi.Server({
     host: "localhost",
-    port: 1234,
+    port: port,
   });
 
   server.route([
