@@ -7,7 +7,6 @@ const prisma = new PrismaClient();
 
 const init = async () => {
   const server = Hapi.Server({
-    host: "localhost",
     port: port,
   });
 
